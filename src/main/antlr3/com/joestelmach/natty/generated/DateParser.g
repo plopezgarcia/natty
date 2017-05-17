@@ -53,7 +53,7 @@ tokens {
 }
 
 parse
-  : empty ((recurrence)=>recurrence | date_time_alternative)
+  : empty (formal_date)
   ;
   
 recurrence

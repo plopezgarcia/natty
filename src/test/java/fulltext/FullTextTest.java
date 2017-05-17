@@ -1,4 +1,4 @@
-package lexigram;
+package fulltext;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -10,13 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class LxgTests {
+public class FullTextTest {
 
     @Test
     public void dateExtractionFileTest() throws Exception {
 
         Parser parser = new Parser();
-        List groups = parser.parse(FileUtils.readFileToString(new File("src/test/resources/dates/i2b2.txt")));
+        List groups = parser.parse(FileUtils.readFileToString(new File("src/test/resources/dates/fulltext.txt")));
         for (Object group : groups) {
             //System.out.println("DATEGROUP");
             DateGroup dg = (DateGroup) group;
@@ -24,10 +24,12 @@ public class LxgTests {
             //System.out.println("Parse locations: " + dg.getParseLocations());
             //System.out.println("Is date inferred: " + dg.isDateInferred());
 
-            if (isExplicitDate(dg)) {
-                Date date = dg.getDates().get(0);
+            //if (isExplicitDate(dg)) {
+            //    Date date = dg.getDates().get(0);
+            for (Date date: dg.getDates()) {
                 System.out.println(dg.getLine() + ": " + new SimpleDateFormat("MM-dd-yyyy").format(date));
             }
+            //}
         }
     }
 
